@@ -6,7 +6,11 @@ public class FirstPersonController : MonoBehaviour
 {
     public float speed;
 
+    public float jump;
+
     public GameObject personCamera;
+
+    public Rigidbody rigid;
 
     private void Start()
     {
@@ -18,19 +22,23 @@ public class FirstPersonController : MonoBehaviour
         transform.Rotate(new Vector2(0, Input.GetAxis("Mouse X")));
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position = transform.position + transform.forward * Time.deltaTime * speed;
+            rigid.AddForce(transform.forward * Time.deltaTime * speed);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position = transform.position - transform.forward * Time.deltaTime * speed;
+            rigid.AddForce(-transform.forward * Time.deltaTime * speed);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position = transform.position + transform.right * Time.deltaTime * speed;
+            rigid.AddForce(transform.right * Time.deltaTime * speed);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position = transform.position - transform.right * Time.deltaTime * speed;
+            rigid.AddForce(-transform.right * Time.deltaTime * speed);
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && rigid.velocity.y == 0)
+        {
+            rigid.AddForce(transform.up * jump);
         }
         personCamera.transform.Rotate(new Vector2(Input.GetAxis("Mouse Y") * -1, 0));
     }
