@@ -152,7 +152,7 @@ Transform:
   m_LocalScale: {x: 0.62272245, y: 0.62272245, z: 1.8496102}
   m_Children: []
   m_Father: {fileID: 1791559468}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &172638845
 BoxCollider:
@@ -527,11 +527,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018974162}
   m_LocalRotation: {x: 0.15357733, y: -0, z: -0, w: 0.9881367}
-  m_LocalPosition: {x: 5.081831, y: 3.4708982, z: 10.417}
+  m_LocalPosition: {x: 0, y: 1.52, z: -2.3129997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 1791559468}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 17.669, y: 0, z: 0}
 --- !u!114 &1018974166
 MonoBehaviour:
@@ -685,7 +685,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1791559468}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1694909974
 GameObject:
@@ -5472,7 +5472,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -5549,10 +5549,11 @@ Transform:
   m_LocalPosition: {x: 5.081831, y: 1.9508982, z: 12.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1018974165}
   - {fileID: 172638844}
   - {fileID: 1576289980}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1791559469
 MonoBehaviour:
@@ -5568,7 +5569,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigid: {fileID: 1791559464}
   cameraGameObject: {fileID: 1018974162}
-  speed: 10
+  speed: 50
+  angle: {x: 0, y: 0, z: 0}
+  angle2: {x: 0, y: 0, z: 0}
+  gyroscopeSpeed: 0.3
+  torgueSpeed: 3
 --- !u!1 &1810923230
 GameObject:
   m_ObjectHideFlags: 0

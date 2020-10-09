@@ -8,6 +8,8 @@ public class ShipController : MonoBehaviour
 
     public Vector3 angle;
     public Vector3 angle2;
+    public float gyroscopeSpeed;
+    public float torgueSpeed;
 
     private void Start()
     {
@@ -18,8 +20,8 @@ public class ShipController : MonoBehaviour
     private void Update()
     {
         ShipControl();
-        CameraFollower();
-        CameraRotate();
+        //CameraFollower();
+        //CameraRotate();
 
         angle2 = cameraGameObject.transform.rotation.eulerAngles - angle;
     }
@@ -58,5 +60,15 @@ public class ShipController : MonoBehaviour
         {
             rigid.AddForce(-transform.right * Time.deltaTime * speed);
         }
+        if (Input.GetKey(KeyCode.E))
+        {
+            rigid.AddRelativeTorque(new Vector3(0, 0, -torgueSpeed * Time.deltaTime));
+        }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            rigid.AddRelativeTorque(new Vector3(0, 0, torgueSpeed * Time.deltaTime));
+        }
+
+        rigid.AddRelativeTorque(new Vector3(Input.GetAxis("Mouse Y") * -1, Input.GetAxis("Mouse X"), 0) * gyroscopeSpeed);
     }
 }
