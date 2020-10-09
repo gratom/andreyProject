@@ -50,5 +50,13 @@ public class ShipController : MonoBehaviour
         {
             rigid.AddForce(-transform.forward * Time.deltaTime * speed);
         }
+        if (Input.GetKey(KeyCode.D))
+        {
+            rigid.AddForce(transform.right * Time.deltaTime * speed);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            rigid.AddForce(-transform.right * Time.deltaTime * speed);
+        }
     }
 }
