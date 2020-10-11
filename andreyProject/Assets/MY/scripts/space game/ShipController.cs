@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class ShipController : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class ShipController : MonoBehaviour
     public Vector3 angle2;
     public float gyroscopeSpeed;
     public float torgueSpeed;
+
+    public float ore;
+    public Text oreCount;
+
+    public int money;
+    public Text moneyCount;
 
     private void Start()
     {
@@ -24,6 +31,8 @@ public class ShipController : MonoBehaviour
         //CameraRotate();
 
         angle2 = cameraGameObject.transform.rotation.eulerAngles - angle;
+        oreCount.text = ore.ToString("0.0");
+        moneyCount.text = money.ToString();
     }
 
     public void CameraFollower()
