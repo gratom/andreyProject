@@ -3,9 +3,20 @@ using UnityEngine.UI;
 
 public class ShipController : MonoBehaviour
 {
+    //sdelat' tormoz, coordinati, sdacha mineraiov, dvizhenie vverh/vniz;
+    public enum ShipMode
+    {
+        battleMode,
+        mineMode
+    }
+
+    private ShipMode shipMode;
+
     public Rigidbody rigid;
     public GameObject cameraGameObject;
     public float speed;
+    public float miningSpeed;
+    public AsteroidTrigger asteroidTrigger;
 
     public Vector3 angle;
     public Vector3 angle2;
@@ -17,6 +28,18 @@ public class ShipController : MonoBehaviour
 
     public int money;
     public Text moneyCount;
+
+    public float shipSpeed;
+    public Text shipSpeedCount;
+
+    public float coordinates_x;
+    public Text coordinatesCount_x;
+
+    public float coordinates_y;
+    public Text coordinatesCount_y;
+
+    public float coordinates_z;
+    public Text coordinatesCount_z;
 
     private void Start()
     {
@@ -33,6 +56,8 @@ public class ShipController : MonoBehaviour
         angle2 = cameraGameObject.transform.rotation.eulerAngles - angle;
         oreCount.text = ore.ToString("0.0");
         moneyCount.text = money.ToString();
+        shipSpeed = rigid.velocity.magnitude;
+        shipSpeedCount.text = shipSpeed.ToString("0.00");
     }
 
     public void CameraFollower()
@@ -77,7 +102,35 @@ public class ShipController : MonoBehaviour
         {
             rigid.AddRelativeTorque(new Vector3(0, 0, torgueSpeed * Time.deltaTime));
         }
-
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            shipMode = ShipMode.mineMode;
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            shipMode = ShipMode.battleMode;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            if (shipMode == ShipMode.mineMode)
+            {
+                if (asteroidTrigger.currentAsteroid != null)
+                {
+                    Mining();
+                }
+            }
+        }
         rigid.AddRelativeTorque(new Vector3(Input.GetAxis("Mouse Y") * -1, Input.GetAxis("Mouse X"), 0) * gyroscopeSpeed);
+    }
+
+    public void Mining()
+    {
+        asteroidTrigger.currentAsteroid.transform.localScale -= new Vector3(1, 1, 1) * miningSpeed * Time.deltaTime;
+        Vector3 V = asteroidTrigger.currentAsteroid.transform.localScale;
+        ore += miningSpeed * Time.deltaTime;
+        if (V.x < 1 || V.y < 1 || V.z < 1)
+        {
+            Destroy(asteroidTrigger.currentAsteroid);
+        }
     }
 }
