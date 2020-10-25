@@ -110,6 +110,16 @@ public class ShipController : MonoBehaviour
         {
             shipMode = ShipMode.battleMode;
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            rigid.drag = 10;
+            speed = speed * 25;
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            rigid.drag = 0;
+            speed = speed / 25;
+        }
         if (Input.GetMouseButton(0))
         {
             if (shipMode == ShipMode.mineMode)
